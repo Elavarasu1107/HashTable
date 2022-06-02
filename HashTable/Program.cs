@@ -6,7 +6,7 @@ namespace HashTable
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Enter 1 for Sentence Frequency\n 2 for Frequency in Paragraph");
+            Console.WriteLine("Enter 1 for Sentence Frequency\n 2 for Frequency in Paragraph\n 3 for Word Removal");
             Console.WriteLine("Enter a Number");
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -44,6 +44,32 @@ namespace HashTable
                         foreach (string data in distinctWords)
                         {
                             Console.WriteLine(data + ": " + myHash.FrequencyOfWords(data));
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        string givenPhrase = "Paranoids are not paranoid because they are paranoid but because " +
+                                             "they keep putting themselves deliberately into paranoid avoidable situations";
+
+                        string[] arrayOfPhrase = givenPhrase.Split(" ");
+                        int length1 = arrayOfPhrase.Length;
+                        MyMapNode<int, string> myHash = new MyMapNode<int, string>(arrayOfPhrase.Length);
+                        int j = 0;
+                        foreach (string data in arrayOfPhrase)
+                        {
+                            myHash.Add(j, data);
+                            j++;
+                        }
+
+                        foreach (string data in arrayOfPhrase)
+                        {
+                            if (data == "avoidable")
+                            {
+                                myHash.Remove(0);
+                                continue;
+                            }
+                            Console.Write(String.Join("",data," "));
                         }
                         break;
                     }
